@@ -3,7 +3,8 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pyludus.settings")
+    env = os.getenv('PYLUDUS_PROFILE', 'development')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pyludus.settings." + env)
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

@@ -11,6 +11,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pyludus.settings")
+env = os.getenv('PYLUDUS_PROFILE', 'development')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pyludus.settings." + env)
 
 application = get_wsgi_application()
