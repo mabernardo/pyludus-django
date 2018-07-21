@@ -10,3 +10,9 @@ A game collection manager with automatic download of details, Steam integration 
     pip install --upgrade pip && pip install wheel
     pip install -r requirements.txt
 
+## Running
+
+    ./manage.py makemigratiosn
+    ./manage.py migrate
+    ./manage.py initadmin
+    ./manage.py loaddata admin_interface_theme_pyludus.json
