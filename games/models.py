@@ -5,12 +5,18 @@ from django.db import models
 class Platform(models.Model):
     name = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         db_table = 'platform'
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = 'genre'
@@ -20,6 +26,9 @@ class Developer(models.Model):
     name = models.CharField(max_length=200)
     website = models.URLField(null=True)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         db_table = 'developer'
 
@@ -27,6 +36,9 @@ class Developer(models.Model):
 class Publisher(models.Model):
     name = models.CharField(max_length=200)
     website = models.URLField(null=True)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = 'publisher'
@@ -72,6 +84,9 @@ class Store:
 
 class Tag(models.Model):
     name = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = 'tag'
@@ -126,6 +141,15 @@ class Game(models.Model):
     store_game_id = models.CharField(null=True, max_length=36)
     created = models.DateTimeField(auto_now_add=True)
     user = models.ManyToManyField(settings.AUTH_USER_MODEL, db_table='user_game')
+
+    def _platforms(self):
+        return ", ".join((str(p) for p in self.platforms.all()))
+
+    def _genres(self):
+        return ", ".join((str(g) for g in self.genres.all()))
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = 'game'
